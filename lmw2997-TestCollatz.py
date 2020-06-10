@@ -15,7 +15,7 @@
 from io import StringIO
 from unittest import main, TestCase
 
-from Collatz import collatz_read, collatz_eval, collatz_print, collatz_solve
+from Collatz import collatz_read, collatz_eval, collatz_print, collatz_solve, cycle_length_helper
 
 # -----------
 # TestCollatz
@@ -63,7 +63,7 @@ class TestCollatz (TestCase):
         v = collatz_eval(900, 1000)
         self.assertEqual(v, 174)
 
-    # (9 Custom unit tests)
+    # (11 Custom unit tests)
 
     # test edge cases
     def test_eval_edge_1(self):
@@ -74,20 +74,29 @@ class TestCollatz (TestCase):
         v = collatz_eval(999999, 999999)
         self.assertEqual(v, 259)
 
+    def test_eval_edge_3(self):
+        v = collatz_eval(10, 1)
+        self.assertEqual(v,20)
+
     # optimization consistency
     def test_eval_theorem_1(self):
         v = collatz_eval(4, 40)
-        q = collatz_eval(6, 40)
+        q = collatz_eval(20, 40)
         self.assertEqual(v, q)
 
     def test_eval_theorem_2(self):
         v = collatz_eval(15, 300)
-        q = collatz_eval(51, 300)
+        q = collatz_eval(150, 300)
         self.assertEqual(v, q)
 
     def test_eval_theorem_3(self):
-        v = collatz_eval(80, 500)
+        v = collatz_eval(250, 500)
         q = collatz_eval(10, 500)
+        self.assertEqual(v, q)
+
+    def test_eval_theorem_4(self):
+        v = collatz_eval(950, 2000)
+        q = collatz_eval(1000, 2000)
         self.assertEqual(v, q)
 
     # general tests
@@ -104,8 +113,8 @@ class TestCollatz (TestCase):
         self.assertEqual(v, 62)
 
     def test_eval_custom_4(self):
-        v = collatz_eval(1205, 6263)
-        self.assertEqual(v, 262)
+        v = collatz_eval(1003, 1010)
+        self.assertEqual(v, 112)
 
     # -----
     # print
@@ -136,13 +145,19 @@ class TestCollatz (TestCase):
         self.assertEqual(
             w.getvalue(), "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n")
 
-    # (1 Custom unit tests)
+    # (2 Custom unit tests)
 
     def test_solve_alt_1(self):
-        r = StringIO("1 10\n5 10\n21 800\n")
+        r = StringIO("1 10\n5 10\n")
         w = StringIO()
         collatz_solve(r, w)
-        self.assertEqual(w.getvalue(), "1 10 20\n5 10 20\n21 800 171\n")
+        self.assertEqual(w.getvalue(), "1 10 20\n5 10 20\n")
+
+    def test_solve_edge_1(self):
+        r = StringIO("37 773\n\n1 824\n")
+        w = StringIO()
+        collatz_solve(r, w)
+        self.assertEqual(w.getvalue(), "37 773 171\n\n1 824 171\n")
 
 # ----
 # main
