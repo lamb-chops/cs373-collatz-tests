@@ -77,6 +77,10 @@ class TestCollatz (TestCase):
         v = collatz_eval(90000, 100000)
         self.assertEqual(v, 333)
 
+    def test_eval_8(self):
+        v = collatz_eval(1, 3746)
+        self.assertEqual(v, 238)
+
     # -----
     # print
     # -----
@@ -153,9 +157,10 @@ if __name__ == "__main__":
 
 
 % cat TestCollatz.out
-.......
+....................
 ----------------------------------------------------------------------
-Ran 7 tests in 0.000s
+Ran 21 tests in 0.088s
+
 OK
 
 
@@ -164,14 +169,11 @@ OK
 
 
 % cat TestCollatz.out
-.......
-----------------------------------------------------------------------
-Ran 7 tests in 0.000s
-OK
 Name             Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------
-Collatz.py          12      0      2      0   100%
-TestCollatz.py      32      0      0      0   100%
+Collatz.py          41      0     12      0   100%
+TestCollatz.py      84      0      0      0   100%
 ------------------------------------------------------------
-TOTAL               44      0      2      0   100%
+TOTAL              125      0     12      0   100%
+
 """
