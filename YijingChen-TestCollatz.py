@@ -23,6 +23,7 @@ from Collatz import collatz_read, collatz_eval, collatz_print, collatz_solve
 
 
 class TestCollatz (TestCase):
+
     # ----
     # read
     # ----
@@ -83,8 +84,8 @@ class TestCollatz (TestCase):
         self.assertEqual(v, 238)
 
     def test_eval_7(self):
-        v = collatz_eval(21, 22)
-        self.assertEqual(v, 16)
+        v = collatz_eval(2300,30000)
+        self.assertEqual(v, 308)
 
 
     # -----
@@ -111,6 +112,16 @@ class TestCollatz (TestCase):
         collatz_print(w, 900, 1000, 174)
         self.assertEqual(w.getvalue(), "900 1000 174\n")
     
+    def test_print_5(self):
+        w = StringIO()
+        collatz_print(w, 340, 123002, 354)
+        self.assertEqual(w.getvalue(), "340 123002 354\n")
+
+    def test_print_6(self):
+        w = StringIO()
+        collatz_print(w, 2300, 30000, 308)
+        self.assertEqual(w.getvalue(), "2300 30000 308\n")
+
 
     # -----
     # solve
@@ -143,6 +154,13 @@ class TestCollatz (TestCase):
         collatz_solve(r, w)
         self.assertEqual(
             w.getvalue(), "2318 1144 183\n465 546 142\n884 1189 182\n2069 674 182\n")
+
+    def test_solve_5(self):
+        r = StringIO("783 93219\n\n\n884 1189\n")
+        w = StringIO()
+        collatz_solve(r, w)
+        self.assertEqual(
+            w.getvalue(), "783 93219 351\n884 1189 182\n")
 
 
 # ----
