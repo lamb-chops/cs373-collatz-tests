@@ -254,6 +254,12 @@ class TestCollatz (TestCase):
         collatz_solve(r, w)
         self.assertEqual(
             w.getvalue(), "10000 1 262\n2 1 2\n10000 9999 92\n")
+    
+    def test_solve_4(self):
+        r = StringIO("\n")
+        w = StringIO()
+        collatz_solve(r, w)
+        self.assertEqual(w.getvalue(), "")
 
 # ----
 # main
