@@ -79,19 +79,19 @@ class TestCollatz (TestCase):
         self.assertEqual(v,119)
 
     # incorrect input
-    def test_eval_5(self):
+    def test_eval_6(self):
         v = collatz_eval(0,10)
         self.assertEqual(v,20)
     # long range
-    def test_eval_6(self):
+    def test_eval_7(self):
         v = collatz_eval(1,99999)
         self.assertEqual(v,351)
 
-    def test_eval_7(self):
+    def test_eval_8(self):
         v = collatz_eval(200,200)
         self.assertEqual(v,27)
 
-    def test_eval_8(self):
+    def test_eval_9(self):
         v = collatz_eval(60000,2000)
         self.assertEqual(v,340)
 
@@ -111,17 +111,17 @@ class TestCollatz (TestCase):
         collatz_print(w,10, 200, 4)
         self.assertEqual(w.getvalue(),"10 200 4\n")
 
-    def test_print_1(self):
+    def test_print_2(self):
         w = StringIO()
         collatz_print(w,21, 21, 21)
         self.assertEqual(w.getvalue(),"21 21 21\n")
 
-    def test_print_2(self):
+    def test_print_3(self):
         w = StringIO()
         collatz_print(w,1000, 1001, 1000)
         self.assertEqual(w.getvalue(),"1000 1001 1000\n")
 
-    def test_print_3(self):
+    def test_print_4(self):
         w = StringIO()
         collatz_print(w,10, 200, 125)
         self.assertEqual(w.getvalue(),"10 200 125\n")
