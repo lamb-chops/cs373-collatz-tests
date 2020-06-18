@@ -162,6 +162,14 @@ class TestCollatz(TestCase):
 		self.assertEqual(
 			w.getvalue(), "1 999 179\n")
 
+	# test with blank line, HARDEST TO FIX
+	def test_solve_4(self):
+		r = StringIO("1 10\n\n100 200")
+		w = StringIO()
+		collatz_solve(r, w)
+		self.assertEqual(
+			w.getvalue(), "1 10 20\n100 200 125\n")
+
 
 # ----
 # main
@@ -203,25 +211,17 @@ cat TestCollatz.out
 coverage report -m                   >> TestCollatz.out
 cat TestCollatz.out
 
-Albins-MacBook-Pro:collatz albisourous$ coverage run --branch TestCollatz.py >  TestCollatz.out 2>&1
-Albins-MacBook-Pro:collatz albisourous$ cat TestCollatz.out
-...............
+...................
 ----------------------------------------------------------------------
-Ran 15 tests in 0.088s
+Ran 19 tests in 0.066s
 
 OK
-Albins-MacBook-Pro:collatz albisourous$ coverage report -m                   >> TestCollatz.out
-Albins-MacBook-Pro:collatz albisourous$ cat TestCollatz.out
-...............
-----------------------------------------------------------------------
-Ran 15 tests in 0.088s
-
-OK
+break
 Name             Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------
-Collatz.py          28      0     10      0   100%
-TestCollatz.py      66      0      0      0   100%
+Collatz.py          43      0     20      0   100%
+TestCollatz.py      83      0      0      0   100%
 ------------------------------------------------------------
-TOTAL               94      0     10      0   100%
+TOTAL              126      0     20      0   100%
 
 """
