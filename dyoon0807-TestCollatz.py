@@ -81,6 +81,7 @@ class TestCollatz (TestCase):
         v = collatz_eval(100, 200)
         self.assertEqual(v, 125)
 
+    # Failure cases
     # def test_eval_3(self):
     #     v = collatz_eval(201, 210)
     #     self.assertEqual(v, 1)
@@ -124,6 +125,10 @@ class TestCollatz (TestCase):
     def test_eval_10(self):
         v = collatz_eval(80000, 90000)
         self.assertEqual(v, 333)
+        
+    def test_eval_11(self):
+        v = collatz_eval(10001, 11111)
+        self.assertEqual(v, 268)
 
 
     # -----
@@ -193,6 +198,19 @@ class TestCollatz (TestCase):
         collatz_solve(r, w)
         self.assertEqual(
             w.getvalue(), "1500 4500 238\n1 1500 182\n80000 90000 333\n")
+    
+    # Edge cases: blank input or new line only
+    def test_solve_4(self):
+        r = StringIO("")
+        w = StringIO()
+        collatz_solve(r, w)
+        self.assertEqual(w.getvalue(), "")
+            
+    def test_solve_5(self):
+        r = StringIO("\n")
+        w = StringIO()
+        collatz_solve(r, w)
+        self.assertEqual(w.getvalue(), "")
 
 # ----
 # main
